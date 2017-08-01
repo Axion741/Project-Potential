@@ -27,12 +27,13 @@ public class HealthTest : MonoBehaviour {
         }
         else if (playerCurrentHealth <= 0)
         {
-            anim.SetTrigger("isDamaged");
+            anim.SetBool("isDead", true);
         }
 	}
 
     public void DamageTaken()
     {
         playerCurrentHealth = playerCurrentHealth - 10;
+        anim.SetTrigger("isDamaged");
     }
 }
