@@ -3,28 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BarController : MonoBehaviour {
+public class EnemyBarController : MonoBehaviour {
 
-    [SerializeField]
     private float fillValue;
 
     [SerializeField]
     private Image bar;
-    
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         HandleBar();
-	}
+    }
 
     private void HandleBar()
     {
-        fillValue = HealthTest.playerCurrentHealth / HealthTest.playerMaxHealth;
+        fillValue = EnemyStats.currentHealth / EnemyStats.maxHealth;
         bar.fillAmount = fillValue;
     }
 }
+
+
