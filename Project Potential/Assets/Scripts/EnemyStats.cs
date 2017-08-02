@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour {
 
-    
-    public static float currentHealth;
-
-    public static float maxHealth = 100;
-
     private Animator eAnim;
     private Animator pAnim;
     public GameObject player;
+    int max = 100;
+    int min = 1;
+    int choice;
 
-	// Use this for initialization
-	void Start () {
+    public static float currentHealth;
+    public static float maxHealth = 100;
+    private float damage = 10;
+    private float attackBoost = 1f;
+
+
+    // Use this for initialization
+    void Start () {
         pAnim = player.GetComponent<Animator>();
         eAnim = GetComponent<Animator>();
         currentHealth = maxHealth;
@@ -34,9 +38,55 @@ public class EnemyStats : MonoBehaviour {
         }
 	}
 
-    public void DealDamage()
+    private void PunchAttack()
     {
-        PlayerStats.currentHealth = PlayerStats.currentHealth - 10;
+        eAnim.SetTrigger("isPunching");
+    }
+
+    public void PunchDamage()
+    {
+        PlayerStats.currentHealth = PlayerStats.currentHealth - damage * attackBoost;
         pAnim.SetTrigger("isDamaged");
+    }
+
+    private void KickAttack()
+    {
+        eAnim.SetTrigger("isKicking");
+    }
+
+    public void KickDamage()
+    {
+        PlayerStats.currentHealth = PlayerStats.currentHealth - damage * 2.5f * attackBoost;
+        pAnim.SetTrigger("isDamaged");
+    }
+
+    private void PowerUp()
+    {
+        eAnim.SetTrigger("isPowerUp");
+        attackBoost = attackBoost + 0.1f;
+    }
+
+    public void ResetBoost()
+    {
+        attackBoost = 1;
+    }
+
+    public void EnemyAI()
+    {
+        //Generate a number and use to determine which attack to use.
+        choice = Random.Range(min, max);
+        print("choice is" + choice);
+        if (choice >= 75)
+        {
+            KickAttack();
+        }
+        else if (choice <= 50)
+        {
+            PunchAttack();
+        }
+        else
+        {
+            PowerUp();
+        }
     }
 }

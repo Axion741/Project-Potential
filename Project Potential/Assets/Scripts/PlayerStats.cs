@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
 
-    public static float currentHealth;
-
-    public static float maxHealth = 100;
-
     private Animator pAnim;
     private Animator eAnim;
+
     public GameObject enemy;
+
+    public static float currentHealth;
+    public static float maxHealth = 100;
+    private float damage = 10;
+    private float attackBoost = 1f;
+    
     
 
     // Use this for initialization
@@ -20,12 +23,14 @@ public class PlayerStats : MonoBehaviour {
         eAnim = enemy.GetComponent<Animator>();
         pAnim = GetComponent<Animator>();
         currentHealth = maxHealth;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         print(currentHealth);
+        print("attackboost = " + attackBoost);
 
         if (currentHealth > maxHealth)
         {
@@ -37,9 +42,36 @@ public class PlayerStats : MonoBehaviour {
         }
     }
 
-    public void DealDamage()
+    public void PunchAttack()
     {
-        EnemyStats.currentHealth = EnemyStats.currentHealth - 10;
+        pAnim.SetTrigger("isPunching");
+    }
+
+    public void PunchDamage()
+    {
+        EnemyStats.currentHealth = EnemyStats.currentHealth - damage * attackBoost;
         eAnim.SetTrigger("isDamaged");
+    }
+
+    public void KickAttack()
+    {
+        pAnim.SetTrigger("isKicking");
+    }
+
+    public void KickDamage()
+    {
+        EnemyStats.currentHealth = EnemyStats.currentHealth - damage * 2.5f * attackBoost;
+        eAnim.SetTrigger("isDamaged");
+    }
+
+    public void PowerUp()
+    {
+        pAnim.SetTrigger("isPowerUp");
+        attackBoost = attackBoost + 0.1f;
+    }
+
+    public void BoostReset()
+    {
+        attackBoost = 1;
     }
 }
