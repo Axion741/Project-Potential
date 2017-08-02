@@ -45,6 +45,7 @@ public class PlayerStats : MonoBehaviour {
     public void PunchAttack()
     {
         pAnim.SetTrigger("isPunching");
+        TurnController.TurnChange();
     }
 
     public void PunchDamage()
@@ -56,6 +57,7 @@ public class PlayerStats : MonoBehaviour {
     public void KickAttack()
     {
         pAnim.SetTrigger("isKicking");
+        TurnController.TurnChange();
     }
 
     public void KickDamage()
@@ -68,6 +70,7 @@ public class PlayerStats : MonoBehaviour {
     {
         pAnim.SetTrigger("isPowerUp");
         attackBoost = attackBoost + 0.1f;
+        TurnController.TurnChange();
     }
 
     public void BoostReset()

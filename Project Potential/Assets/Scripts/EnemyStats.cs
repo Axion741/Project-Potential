@@ -41,6 +41,7 @@ public class EnemyStats : MonoBehaviour {
     private void PunchAttack()
     {
         eAnim.SetTrigger("isPunching");
+        TurnController.TurnChange();
     }
 
     public void PunchDamage()
@@ -52,6 +53,7 @@ public class EnemyStats : MonoBehaviour {
     private void KickAttack()
     {
         eAnim.SetTrigger("isKicking");
+        TurnController.TurnChange();
     }
 
     public void KickDamage()
@@ -64,6 +66,7 @@ public class EnemyStats : MonoBehaviour {
     {
         eAnim.SetTrigger("isPowerUp");
         attackBoost = attackBoost + 0.1f;
+        TurnController.TurnChange();
     }
 
     public void ResetBoost()
