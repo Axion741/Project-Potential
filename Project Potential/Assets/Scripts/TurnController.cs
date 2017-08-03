@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TurnController : MonoBehaviour {
 
     public static TurnController instance;
-    public static bool playerTurn = true;
+    public static bool playerTurn;
     public static GameObject ControlBlocker;
     public static GameObject Enemy;
 
@@ -18,6 +18,7 @@ public class TurnController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        playerTurn = true;
         ControlBlocker = GameObject.Find("Control Blocker");
         Enemy = GameObject.Find("EnemyCharacter");
         UIController();
