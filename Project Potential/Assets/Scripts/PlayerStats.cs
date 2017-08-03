@@ -29,7 +29,7 @@ public class PlayerStats : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        print(currentHealth);
+        print("Player Health = " + currentHealth);
         print("attackboost = " + attackBoost);
 
         if (currentHealth > maxHealth)
@@ -45,7 +45,7 @@ public class PlayerStats : MonoBehaviour {
     public void PunchAttack()
     {
         pAnim.SetTrigger("isPunching");
-        TurnController.TurnChange();
+        //TurnController.TurnChange();
     }
 
     public void PunchDamage()
@@ -57,7 +57,7 @@ public class PlayerStats : MonoBehaviour {
     public void KickAttack()
     {
         pAnim.SetTrigger("isKicking");
-        TurnController.TurnChange();
+        //TurnController.TurnChange();
     }
 
     public void KickDamage()
@@ -70,11 +70,16 @@ public class PlayerStats : MonoBehaviour {
     {
         pAnim.SetTrigger("isPowerUp");
         attackBoost = attackBoost + 0.1f;
-        TurnController.TurnChange();
+        //TurnController.TurnChange();
     }
 
     public void BoostReset()
     {
         attackBoost = 1;
+    }
+
+    private void TurnChanger()
+    {
+        TurnController.TurnChange();
     }
 }

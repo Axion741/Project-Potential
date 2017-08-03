@@ -26,7 +26,7 @@ public class EnemyStats : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        print(currentHealth);
+        print("Enemy Health = " + currentHealth);
 
         if (currentHealth > maxHealth)
         {
@@ -36,12 +36,13 @@ public class EnemyStats : MonoBehaviour {
         {
             eAnim.SetBool("isDead", true);
         }
+
 	}
 
     private void PunchAttack()
     {
         eAnim.SetTrigger("isPunching");
-        TurnController.TurnChange();
+        //TurnController.TurnChange();
     }
 
     public void PunchDamage()
@@ -53,7 +54,7 @@ public class EnemyStats : MonoBehaviour {
     private void KickAttack()
     {
         eAnim.SetTrigger("isKicking");
-        TurnController.TurnChange();
+        //TurnController.TurnChange();
     }
 
     public void KickDamage()
@@ -66,7 +67,7 @@ public class EnemyStats : MonoBehaviour {
     {
         eAnim.SetTrigger("isPowerUp");
         attackBoost = attackBoost + 0.1f;
-        TurnController.TurnChange();
+        //TurnController.TurnChange();
     }
 
     public void ResetBoost()
@@ -90,6 +91,25 @@ public class EnemyStats : MonoBehaviour {
         else
         {
             PowerUp();
+        }
+    }
+
+    public void EnemyAttackController()
+    {
+        if(TurnController.playerTurn == true)
+        {
+            Debug.Log("Not Enemy Turn");
+        }else if (TurnController.playerTurn == false)
+        {
+            EnemyAI();
+        }
+    }
+
+    private void TurnChanger()
+    {
+        if (TurnController.playerTurn == false)
+        {
+        TurnController.TurnChange();
         }
     }
 }

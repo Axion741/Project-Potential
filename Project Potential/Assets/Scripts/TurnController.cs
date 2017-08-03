@@ -5,15 +5,23 @@ using UnityEngine.UI;
 
 public class TurnController : MonoBehaviour {
 
-    static bool playerTurn;
+    public static TurnController instance;
+    public static bool playerTurn = true;
     public static GameObject ControlBlocker;
+    public static GameObject Enemy;
 
-	// Use this for initialization
-	void Start () {
-        playerTurn = true;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    // Use this for initialization
+    void Start () {
         ControlBlocker = GameObject.Find("Control Blocker");
+        Enemy = GameObject.Find("EnemyCharacter");
         UIController();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -25,11 +33,15 @@ public class TurnController : MonoBehaviour {
         if (playerTurn == true)
         {
             playerTurn = false;
+            print("TCnowFalse");
             UIController();
+            EnemyAttackTrigger();
+            
         }
         else if(playerTurn == false)
         {
             playerTurn = true;
+            print("TCnowTrue");
             UIController();
         }
     }
@@ -40,6 +52,7 @@ public class TurnController : MonoBehaviour {
         {
             print("PlayerTurn");
             //Delay here
+            //yield return new WaitForSeconds(2);
             ControlBlocker.SetActive(false);
         }
         else if (playerTurn == false)
@@ -47,5 +60,10 @@ public class TurnController : MonoBehaviour {
             print("EnemyTurn");
             ControlBlocker.SetActive(true);
         }
+    }
+
+    public static void EnemyAttackTrigger()
+    {
+        Enemy.GetComponent<EnemyStats>().EnemyAttackController();
     }
 }
