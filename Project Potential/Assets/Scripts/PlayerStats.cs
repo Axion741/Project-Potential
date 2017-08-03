@@ -12,6 +12,9 @@ public class PlayerStats : MonoBehaviour {
 
     public static float currentHealth;
     public static float maxHealth = 100;
+    public static float currentKi;
+    public static float maxKi = 100;
+
     private float damage = 10;
     private float attackBoost = 1f;
     
@@ -23,6 +26,7 @@ public class PlayerStats : MonoBehaviour {
         eAnim = enemy.GetComponent<Animator>();
         pAnim = GetComponent<Animator>();
         currentHealth = maxHealth;
+        currentKi = maxKi;
         
     }
 

@@ -8,8 +8,11 @@ public class PlayerBarController : MonoBehaviour {
     
     private float fillValue;
 
-   [SerializeField]
-    private Image bar;
+    [SerializeField]
+    private Image healthBar;
+
+    [SerializeField]
+    private Image kiBar;
     
 
 	// Use this for initialization
@@ -19,12 +22,18 @@ public class PlayerBarController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        HandleBar();
+        HandleHealthBar();
 	}
 
-    private void HandleBar()
+    private void HandleHealthBar()
     {
         fillValue = PlayerStats.currentHealth /PlayerStats.maxHealth;
-        bar.fillAmount = fillValue;
+        healthBar.fillAmount = fillValue;
+    }
+
+    private void HandleKiBar()
+    {
+        fillValue = PlayerStats.currentKi / PlayerStats.maxKi;
+        healthBar.fillAmount = fillValue;
     }
 }
