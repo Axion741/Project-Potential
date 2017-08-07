@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerBarController : MonoBehaviour {
-
     
     private float fillValue;
 
