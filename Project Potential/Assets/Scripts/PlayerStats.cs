@@ -70,9 +70,29 @@ public class PlayerStats : MonoBehaviour {
         eAnim.SetTrigger("isDamaged");
     }
 
+    public void BlastDashAttack()
+    {
+        if (currentKi < 50)
+        {
+            Debug.Log("Ki less than 50");
+        }
+        else
+        {
+            pAnim.SetTrigger("isBlastDash");
+            currentKi -= 50;
+        }
+    }
+
+    public void BlastDashDamage()
+    {
+        EnemyStats.currentHealth = EnemyStats.currentHealth - damage * 4f * attackBoost;
+        eAnim.SetTrigger("isDamaged");
+    }
+
     public void PowerUp()
     {
         pAnim.SetTrigger("isPowerUp");
+        currentKi += 20;
         attackBoost = attackBoost + 0.1f;
         //TurnController.TurnChange();
     }

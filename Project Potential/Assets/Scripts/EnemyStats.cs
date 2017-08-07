@@ -13,6 +13,8 @@ public class EnemyStats : MonoBehaviour {
 
     public static float currentHealth;
     public static float maxHealth = 100;
+    public static float currentKi;
+    public static float maxKi = 100;
     private float damage = 10;
     private float attackBoost = 1f;
 
@@ -22,6 +24,7 @@ public class EnemyStats : MonoBehaviour {
         pAnim = player.GetComponent<Animator>();
         eAnim = GetComponent<Animator>();
         currentHealth = maxHealth;
+        currentKi = maxKi;
 	}
 	
 	// Update is called once per frame
@@ -63,6 +66,25 @@ public class EnemyStats : MonoBehaviour {
         pAnim.SetTrigger("isDamaged");
     }
 
+    public void BlastDashAttack()
+    {
+        if (currentKi < 50)
+        {
+            Debug.Log("Ki less than 50");
+        }
+        else
+        {
+            eAnim.SetTrigger("isBlastDash");
+            currentKi -= 50;
+        }
+    }
+
+    public void BlastDashDamage()
+    {
+        PlayerStats.currentHealth = PlayerStats.currentHealth - damage * 4f * attackBoost;
+        pAnim.SetTrigger("isDamaged");
+    }
+
     private void PowerUp()
     {
         eAnim.SetTrigger("isPowerUp");
@@ -90,7 +112,13 @@ public class EnemyStats : MonoBehaviour {
         }
         else
         {
-            PowerUp();
+            if (currentKi < 50)
+            {
+                PowerUp();
+            }else
+            {
+                BlastDashAttack();
+            }
         }
     }
 
