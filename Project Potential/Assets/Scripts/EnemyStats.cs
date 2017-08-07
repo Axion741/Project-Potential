@@ -7,6 +7,8 @@ public class EnemyStats : MonoBehaviour {
     private Animator eAnim;
     private Animator pAnim;
     public GameObject player;
+    public GameObject blast;
+    private GameObject pBlast;
     int max = 100;
     int min = 1;
     int choice;
@@ -29,7 +31,7 @@ public class EnemyStats : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        print("Enemy Health = " + currentHealth);
+        
 
         if (currentHealth > maxHealth)
         {
@@ -70,7 +72,8 @@ public class EnemyStats : MonoBehaviour {
     {
         if (currentKi < 50)
         {
-            Debug.Log("Ki less than 50");
+            Debug.Log("Too little Ki");
+            EnemyAI();
         }
         else
         {
@@ -82,6 +85,32 @@ public class EnemyStats : MonoBehaviour {
     public void BlastDashDamage()
     {
         PlayerStats.currentHealth = PlayerStats.currentHealth - damage * 4f * attackBoost;
+        pAnim.SetTrigger("isDamaged");
+    }
+
+    public void BlastBarrageAttack()
+    {
+        if (currentKi < 40)
+        {
+            Debug.Log("Too little Ki");
+            EnemyAI();
+        }
+        else
+        {
+            eAnim.SetTrigger("isBarrage");
+        }
+    }
+
+    public void SpawnBlast()
+    {
+        GameObject enemyBlast = Instantiate(blast, new Vector3(7.08f, 3.857f, -1), Quaternion.Euler(0,180,0));
+        enemyBlast.GetComponent<Rigidbody2D>().velocity = new Vector3(-8, 0, 0);
+        currentKi -= 20;
+    }
+
+    public void BlastBarrageDamage()
+    {
+        PlayerStats.currentHealth = PlayerStats.currentHealth - damage * 1.5f * attackBoost;
         pAnim.SetTrigger("isDamaged");
     }
 
@@ -102,23 +131,25 @@ public class EnemyStats : MonoBehaviour {
         //Generate a number and use to determine which attack to use.
         choice = Random.Range(min, max);
         print("choice is" + choice);
-        if (choice >= 75)
+        if (choice <= 20)
         {
             KickAttack();
         }
-        else if (choice <= 50)
+        else if (choice > 20 && choice <= 50)
         {
             PunchAttack();
         }
-        else
+        else if (choice > 50 && choice <= 70)
         {
-            if (currentKi < 50)
-            {
-                PowerUp();
-            }else
-            {
-                BlastDashAttack();
-            }
+            PowerUp();
+        }
+        else if (choice > 70 && choice <= 90)
+        {
+            BlastBarrageAttack();
+        }
+        else if (choice > 90 && choice <= 100)
+        {
+            BlastDashAttack();
         }
     }
 
@@ -135,9 +166,9 @@ public class EnemyStats : MonoBehaviour {
 
     private void TurnChanger()
     {
-        if (TurnController.playerTurn == false)
-        {
+        Debug.Log("ETurnChanger Triggered");
         TurnController.TurnChange();
-        }
+        
     }
+
 }

@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour {
     private Animator eAnim;
 
     public GameObject enemy;
+    public GameObject blast;
 
     public static float currentHealth;
     public static float maxHealth = 100;
@@ -33,8 +34,7 @@ public class PlayerStats : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        print("Player Health = " + currentHealth);
-        print("attackboost = " + attackBoost);
+        
 
         if (currentHealth > maxHealth)
         {
@@ -89,6 +89,31 @@ public class PlayerStats : MonoBehaviour {
         eAnim.SetTrigger("isDamaged");
     }
 
+    public void BlastBarrageAttack()
+    {
+        if (currentKi < 40)
+        {
+            Debug.Log("Ki less than 40");
+        }
+        else
+        {
+            pAnim.SetTrigger("isBarrage");
+        }
+    }
+
+    public void SpawnBlast()
+    {
+        GameObject playerBlast = Instantiate(blast, new Vector3(2.841f, 3.857f, -1), Quaternion.identity);
+        playerBlast.GetComponent<Rigidbody2D>().velocity = new Vector3(8, 0, 0);
+        currentKi -= 20;
+    }
+
+    public void BlastBarrageDamage()
+    {
+        EnemyStats.currentHealth = EnemyStats.currentHealth - damage * 1.5f * attackBoost;
+        eAnim.SetTrigger("isDamaged");
+    }
+
     public void PowerUp()
     {
         pAnim.SetTrigger("isPowerUp");
@@ -105,5 +130,10 @@ public class PlayerStats : MonoBehaviour {
     private void TurnChanger()
     {
         TurnController.TurnChange();
+    }
+
+    private void BlockUI()
+    {
+        TurnController.QuickHide();
     }
 }

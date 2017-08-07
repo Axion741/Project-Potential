@@ -67,4 +67,9 @@ public class TurnController : MonoBehaviour {
     {
         Enemy.GetComponent<EnemyStats>().EnemyAttackController();
     }
+
+    public static void QuickHide()
+    {
+        ControlBlocker.SetActive(true);
+    }
 }
