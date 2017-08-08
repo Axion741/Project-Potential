@@ -8,7 +8,10 @@ public class PlayerPrefsManager : MonoBehaviour {
     const string MASTER_VOLUME_KEY = "master_volume";
     const string DIFFICULTY_KEY = "difficulty";
     const string LEVEL_KEY = "level_unlocked_";
-
+    const string STRENGTH = "strength_modifier";
+    const string SPEED = "speed_modifier";
+    const string ENDURANCE = "endurance_modifier";
+    const string SPIRIT = "spirit_modifier";
    
 
     public static void SetMasterVolume (float volume)
@@ -70,5 +73,45 @@ public class PlayerPrefsManager : MonoBehaviour {
     public static float GetDifficulty ()
     {
         return PlayerPrefs.GetFloat(DIFFICULTY_KEY);
+    }
+
+    public static void SetStrengthMod  (int modStrength)
+    {
+        PlayerPrefs.SetInt(STRENGTH, modStrength);
+    }
+        
+    public static int GetStrengthMod()
+    {
+        return PlayerPrefs.GetInt(STRENGTH);
+    }
+
+    public static void SetSpeedMod(int modSpeed)
+    {
+        PlayerPrefs.SetInt (SPEED, modSpeed);
+    }
+
+    public static int GetSpeedMod()
+    {
+        return PlayerPrefs.GetInt(SPEED);
+    }
+
+    public static void SetEnduranceMod(int modEndurance)
+    {
+        PlayerPrefs.SetInt(ENDURANCE, modEndurance);
+    }
+
+    public static int GetEnduranceMod()
+    {
+        return PlayerPrefs.GetInt(ENDURANCE);
+    }
+
+    public static void SetSpiritMod(int modSpirit)
+    {
+        PlayerPrefs.SetInt(SPIRIT, modSpirit);
+    }
+
+    public static int GetSpiritMod()
+    {
+        return PlayerPrefs.GetInt(SPIRIT);
     }
 }

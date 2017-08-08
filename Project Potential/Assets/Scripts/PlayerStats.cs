@@ -8,13 +8,15 @@ public class PlayerStats : MonoBehaviour {
     private Animator pAnim;
     private Animator eAnim;
 
+    public PlayerAbilities playerAbilities;
     public GameObject enemy;
     public GameObject blast;
 
+
     public static float currentHealth;
-    public static float maxHealth = 100;
+    public static float maxHealth;
     public static float currentKi;
-    public static float maxKi = 100;
+    public static float maxKi;
 
     private float damage = 10;
     private float attackBoost = 1f;
@@ -26,15 +28,16 @@ public class PlayerStats : MonoBehaviour {
     {
         eAnim = enemy.GetComponent<Animator>();
         pAnim = GetComponent<Animator>();
-        currentHealth = maxHealth;
-        currentKi = maxKi;
-        
+        GetMaxHealth();
+        GetMaxKi();
+        print(maxHealth);
+        print(maxKi);        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("currentHealth = " + currentHealth);
 
         if (currentHealth > maxHealth)
         {
@@ -45,6 +48,22 @@ public class PlayerStats : MonoBehaviour {
             pAnim.SetBool("isDead", true);
         }
     }
+
+    //Stat Control
+
+        public void GetMaxHealth()
+    {
+        maxHealth = playerAbilities.maxHealth;
+        currentHealth = maxHealth;
+    }
+
+        public void GetMaxKi()
+    {
+        maxKi = playerAbilities.maxKi;
+        currentKi = maxKi;
+    }
+    
+    //Combat Methods
 
     public void PunchAttack()
     {
