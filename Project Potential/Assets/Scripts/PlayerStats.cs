@@ -18,7 +18,8 @@ public class PlayerStats : MonoBehaviour {
     public static float currentKi;
     public static float maxKi;
 
-    private float damage = 10;
+    private float damage;
+    private float sDamage;
     private float attackBoost = 1f;
     
     
@@ -28,8 +29,7 @@ public class PlayerStats : MonoBehaviour {
     {
         eAnim = enemy.GetComponent<Animator>();
         pAnim = GetComponent<Animator>();
-        GetMaxHealth();
-        GetMaxKi();
+        GetStats();
         print(maxHealth);
         print(maxKi);        
     }
@@ -51,16 +51,14 @@ public class PlayerStats : MonoBehaviour {
 
     //Stat Control
 
-        public void GetMaxHealth()
+        public void GetStats()
     {
         maxHealth = playerAbilities.maxHealth;
         currentHealth = maxHealth;
-    }
-
-        public void GetMaxKi()
-    {
         maxKi = playerAbilities.maxKi;
         currentKi = maxKi;
+        damage = playerAbilities.physicalDamage;
+        sDamage = playerAbilities.spiritDamage;
     }
     
     //Combat Methods
@@ -104,7 +102,7 @@ public class PlayerStats : MonoBehaviour {
 
     public void BlastDashDamage()
     {
-        EnemyStats.currentHealth = EnemyStats.currentHealth - damage * 4f * attackBoost;
+        EnemyStats.currentHealth = EnemyStats.currentHealth - sDamage * 3f * attackBoost;
         eAnim.SetTrigger("isDamaged");
     }
 
@@ -129,7 +127,7 @@ public class PlayerStats : MonoBehaviour {
 
     public void BlastBarrageDamage()
     {
-        EnemyStats.currentHealth = EnemyStats.currentHealth - damage * 1.5f * attackBoost;
+        EnemyStats.currentHealth = EnemyStats.currentHealth - sDamage * 1f * attackBoost;
         eAnim.SetTrigger("isDamaged");
     }
 

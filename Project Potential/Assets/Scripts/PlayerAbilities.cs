@@ -23,6 +23,10 @@ public class PlayerAbilities : MonoBehaviour {
     public float maxHealth;
     
     public float maxKi;
+
+    public float physicalDamage;
+    public float spiritDamage;
+    public float evasionChance;
     
 
     // Use this for initialization
@@ -56,11 +60,13 @@ public class PlayerAbilities : MonoBehaviour {
     public void DetermineStrength()
     {
         currentStrength = baseStrength + PlayerPrefsManager.GetStrengthMod();
+        physicalDamage = currentStrength;
     }
 
     public void DetermineSpeed()
     {
         currentSpeed = baseSpeed + PlayerPrefsManager.GetSpeedMod();
+        evasionChance = currentSpeed / 2;
     }
 
     public void DetermineEndurance()
@@ -71,6 +77,7 @@ public class PlayerAbilities : MonoBehaviour {
     public void DetermineSpirit()
     {
         currentSpirit = baseSpirit + PlayerPrefsManager.GetSpiritMod();
+        spiritDamage = currentSpirit * 1.5f;
     }
 
     public void LevelStrength()
@@ -92,6 +99,7 @@ public class PlayerAbilities : MonoBehaviour {
         modEndurance++;
         PlayerPrefsManager.SetEnduranceMod(modEndurance);
         DetermineEndurance();
+        DetermineHealth();
     }
 
     public void LevelSpirit()
@@ -99,6 +107,7 @@ public class PlayerAbilities : MonoBehaviour {
         modSpirit++;
         PlayerPrefsManager.SetSpiritMod(modSpirit);
         DetermineSpirit();
+        DetermineKi();
     }
 
     public void ResetStats()
@@ -115,6 +124,8 @@ public class PlayerAbilities : MonoBehaviour {
         DetermineEndurance();
         PlayerPrefsManager.SetSpiritMod(modSpirit);
         DetermineSpirit();
+        DetermineHealth();
+        DetermineKi();
     }
 
     public void GetSavedStats()
