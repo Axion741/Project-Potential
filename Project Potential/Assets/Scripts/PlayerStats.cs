@@ -21,6 +21,8 @@ public class PlayerStats : MonoBehaviour {
     private float damage;
     private float sDamage;
     private float attackBoost = 1f;
+    private float hitValue;
+    private float enemyDodge;
     
     
 
@@ -51,7 +53,7 @@ public class PlayerStats : MonoBehaviour {
 
     //Stat Control
 
-        public void GetStats()
+    public void GetStats()
     {
         maxHealth = playerAbilities.maxHealth;
         currentHealth = maxHealth;
@@ -60,31 +62,53 @@ public class PlayerStats : MonoBehaviour {
         damage = playerAbilities.physicalDamage;
         sDamage = playerAbilities.spiritDamage;
     }
-    
+
+    private void HitChecker()
+    {
+        hitValue = Random.Range(0, 100);
+        enemyDodge = EnemyStats.evasionChance;
+    }
+
     //Combat Methods
 
     public void PunchAttack()
     {
+        HitChecker();
         pAnim.SetTrigger("isPunching");
         //TurnController.TurnChange();
     }
 
     public void PunchDamage()
     {
-        EnemyStats.currentHealth = EnemyStats.currentHealth - damage * attackBoost;
-        eAnim.SetTrigger("isDamaged");
+        if (hitValue <= enemyDodge)
+        {
+            eAnim.SetTrigger("isDodging");
+        }
+        else if (hitValue > enemyDodge)
+        {
+            EnemyStats.currentHealth = EnemyStats.currentHealth - damage * attackBoost;
+            eAnim.SetTrigger("isDamaged");
+        }
     }
 
     public void KickAttack()
     {
+        HitChecker();
         pAnim.SetTrigger("isKicking");
         //TurnController.TurnChange();
     }
 
     public void KickDamage()
     {
-        EnemyStats.currentHealth = EnemyStats.currentHealth - damage * 2.5f * attackBoost;
-        eAnim.SetTrigger("isDamaged");
+        if (hitValue <= enemyDodge)
+        {
+            eAnim.SetTrigger("isDodging");
+        }
+        else if (hitValue > enemyDodge)
+        {
+            EnemyStats.currentHealth = EnemyStats.currentHealth - damage * 2.5f * attackBoost;
+            eAnim.SetTrigger("isDamaged");
+        }
     }
 
     public void BlastDashAttack()
@@ -95,6 +119,7 @@ public class PlayerStats : MonoBehaviour {
         }
         else
         {
+            HitChecker();
             pAnim.SetTrigger("isBlastDash");
             currentKi -= 50;
         }
@@ -102,8 +127,15 @@ public class PlayerStats : MonoBehaviour {
 
     public void BlastDashDamage()
     {
-        EnemyStats.currentHealth = EnemyStats.currentHealth - sDamage * 3f * attackBoost;
-        eAnim.SetTrigger("isDamaged");
+        if (hitValue <= enemyDodge)
+        {
+            eAnim.SetTrigger("isDodging");
+        }
+        else if (hitValue > enemyDodge)
+        {
+            EnemyStats.currentHealth = EnemyStats.currentHealth - sDamage * 3f * attackBoost;
+            eAnim.SetTrigger("isDamaged");
+        }
     }
 
     public void BlastBarrageAttack()
@@ -114,6 +146,7 @@ public class PlayerStats : MonoBehaviour {
         }
         else
         {
+            
             pAnim.SetTrigger("isBarrage");
         }
     }
@@ -127,8 +160,16 @@ public class PlayerStats : MonoBehaviour {
 
     public void BlastBarrageDamage()
     {
-        EnemyStats.currentHealth = EnemyStats.currentHealth - sDamage * 1f * attackBoost;
-        eAnim.SetTrigger("isDamaged");
+        HitChecker();
+        if (hitValue <= enemyDodge)
+        {
+            eAnim.SetTrigger("isDodging");
+        }
+        else if (hitValue > enemyDodge)
+        {
+            EnemyStats.currentHealth = EnemyStats.currentHealth - sDamage * 1f * attackBoost;
+            eAnim.SetTrigger("isDamaged");
+        }
     }
 
     public void PowerUp()

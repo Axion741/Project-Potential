@@ -17,7 +17,8 @@ public class EnemyStats : MonoBehaviour {
     int choice;
     float hitValue;
     float playerDodge;
-
+    
+    public static float evasionChance = 10f;
     public static float currentHealth;
     public static float maxHealth = 100;
     public static float currentKi;
