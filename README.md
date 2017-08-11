@@ -1,5 +1,7 @@
 Project Potential
 
+ATTENTION! I'm currently driving around Scotland, so no updates until the beginning of September! - Ax.
+
 This is my first real full-fledged independent Unity game!
 
 Warning!
