@@ -1,6 +1,6 @@
-Project Potential
 
-ATTENTION! I'm currently driving around Scotland, so no updates until the beginning of September! - Ax.
+
+Project Potential
 
 This is my first real full-fledged independent Unity game!
 
@@ -13,3 +13,10 @@ In order to install the .apk file on your android device you must allow unknown 
 
 Have fun and wish me luck!
 -Axion
+
+
+
+Next updates: Credit screen + Stats screen
+
+Update (8/9/17) - Now back from holidays! Currently focusing on finding a new job, but I'll try to keep updating here. Also planning to start noting down the next project goals here in the README for your (and my) convenience.
+
