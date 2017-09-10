@@ -12,6 +12,9 @@ public class PlayerPrefsManager : MonoBehaviour {
     const string SPEED = "speed_modifier";
     const string ENDURANCE = "endurance_modifier";
     const string SPIRIT = "spirit_modifier";
+    const string LEVEL = "player_level";
+    const string EXPERIENCE = "experience_points";
+    const string STATPOINTS = "stat_points";
    
 
     public static void SetMasterVolume (float volume)
@@ -113,5 +116,35 @@ public class PlayerPrefsManager : MonoBehaviour {
     public static int GetSpiritMod()
     {
         return PlayerPrefs.GetInt(SPIRIT);
+    }
+
+    public static void SetPlayerLevel(int playerLevel)
+    {
+        PlayerPrefs.SetInt(LEVEL, playerLevel);
+    }
+
+    public static int GetPlayerLevel()
+    {
+        return PlayerPrefs.GetInt(LEVEL);
+    }
+
+    public static void SetExperiencePoints(int experiencePoints)
+    {
+        PlayerPrefs.SetInt(EXPERIENCE, experiencePoints);
+    }
+
+    public static int GetExperiencePoints()
+    {
+        return PlayerPrefs.GetInt(EXPERIENCE);
+    }
+
+    public static void SetStatPoints(int statPoints)
+    {
+        PlayerPrefs.SetInt(STATPOINTS, statPoints);
+    }
+
+    public static int GetStatPoints()
+    {
+        return PlayerPrefs.GetInt(STATPOINTS);
     }
 }

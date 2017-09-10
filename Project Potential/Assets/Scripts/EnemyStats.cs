@@ -38,16 +38,6 @@ public class EnemyStats : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         
-
-        if (currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
-        else if (currentHealth <= 0)
-        {
-            eAnim.SetBool("isDead", true);
-        }
-
 	}
 
     private void HitChecker()
@@ -214,6 +204,20 @@ public class EnemyStats : MonoBehaviour {
         Debug.Log("ETurnChanger Triggered");
         TurnController.TurnChange();
         
+    }
+
+    public void HealthChecker()
+    {
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        else if (currentHealth <= 0)
+        {
+            eAnim.SetBool("isDead", true);
+            playerAbilities.experiencePoints = playerAbilities.experiencePoints + 500;
+            playerAbilities.SetExperience();
+        }
     }
 
 }

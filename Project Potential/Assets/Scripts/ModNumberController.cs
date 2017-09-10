@@ -11,10 +11,15 @@ public class ModNumberController : MonoBehaviour {
     private int speedMod;
     private int enduranceMod;
     private int spiritMod;
+    private int playerLevel;
+    private int statPoints;
+    private int experiencePoints;
+
+    private PlayerAbilities playerAbilities;
 
 	// Use this for initialization
 	void Start () {
-		
+        playerAbilities = GameObject.FindObjectOfType<PlayerAbilities>();
 	}
 	
 	// Update is called once per frame
@@ -40,6 +45,18 @@ public class ModNumberController : MonoBehaviour {
         {
             SpiritText();
         }
+        else if (gameObject.name == "Current Level")
+        {
+            LevelText();
+        }
+        else if (gameObject.name == "Exp Points")
+        {
+            ExpText();
+        }
+        else if (gameObject.name == "Stat Points")
+        {
+            StatText();
+        }
     }
 
     public void StrengthText()
@@ -64,5 +81,23 @@ public class ModNumberController : MonoBehaviour {
     {
         spiritMod = PlayerPrefsManager.GetSpiritMod();
         text.text = ("<Color=#00ff00ff>+" + spiritMod.ToString() + "</Color>");
+    }
+
+    public void LevelText()
+    {
+        playerLevel = PlayerPrefsManager.GetPlayerLevel();
+        text.text = ("<Color=white> Lvl: " + playerLevel.ToString() + "</Color>");
+    }
+
+    public void ExpText()
+    {
+        experiencePoints = PlayerPrefsManager.GetExperiencePoints();
+        text.text = ("<Color=white> Exp: " + experiencePoints.ToString() + "/" + playerAbilities.experienceThreshold + "</Color>");
+    }
+
+    public void StatText()
+    {
+        statPoints = PlayerPrefsManager.GetStatPoints();
+        text.text = ("<Color=white> Stat Points: " + statPoints.ToString() + "</Color>");
     }
 }

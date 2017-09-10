@@ -8,7 +8,7 @@ public class PlayerAbilities : MonoBehaviour {
     private int baseSpeed = 10;
     private int baseEndurance = 10;
     private int baseSpirit = 10;
-    private int baseLevel = 1;
+    private int playerLevel;
 
     public int currentStrength;
     public int currentSpeed;
@@ -21,16 +21,19 @@ public class PlayerAbilities : MonoBehaviour {
     public int modSpirit;
 
     public float maxHealth;
-    
     public float maxKi;
 
     public float physicalDamage;
     public float spiritDamage;
     public float evasionChance;
-    
+
+    public int experiencePoints;
+    public int experienceThreshold;
+    public int statPoints;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         GetSavedStats();
         DetermineStrength();
         DetermineSpirit();
@@ -38,12 +41,58 @@ public class PlayerAbilities : MonoBehaviour {
         DetermineSpeed();
         DetermineHealth();
         DetermineKi();
-	}
+        print(experiencePoints);
+        LevelUp();
+  	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    public void LevelTester()
+    {
+        experiencePoints = experiencePoints + 500;
+        SetExperience();
+    }
+
+    public void LevelUp()
+    {
+        experienceThreshold = playerLevel * 500;
+        if (experiencePoints >= experienceThreshold)
+        {
+            experiencePoints = experiencePoints - experienceThreshold;
+            playerLevel++;
+            experienceThreshold = playerLevel * 500;
+            statPoints = statPoints + 5;
+            PlayerPrefsManager.SetStatPoints(statPoints);
+            PlayerPrefsManager.SetPlayerLevel(playerLevel);
+            PlayerPrefsManager.SetExperiencePoints(experiencePoints);
+            print("exp to next = " + experienceThreshold);
+            print("current stat points = " + statPoints);
+        }
+        else return;
+    }
+
+    public void SetExperience()
+    {
+        PlayerPrefsManager.SetExperiencePoints(experiencePoints);
+        LevelUp();
+    }
+
+    public void DetermineLevel()
+    {
+        if (playerLevel > 1)
+        {
+            playerLevel = 1;
+            PlayerPrefsManager.SetPlayerLevel(playerLevel);
+            PlayerPrefsManager.GetPlayerLevel();
+        }
+        else
+        {
+            playerLevel = PlayerPrefsManager.GetPlayerLevel();
+        }
+    }
 
     public void DetermineHealth()
     {
@@ -82,32 +131,52 @@ public class PlayerAbilities : MonoBehaviour {
 
     public void LevelStrength()
     {
-        modStrength++;
-        PlayerPrefsManager.SetStrengthMod(modStrength);
-        DetermineStrength();
+        if (statPoints > 0)
+        {
+            modStrength++;
+            PlayerPrefsManager.SetStrengthMod(modStrength);
+            DetermineStrength();
+            statPoints--;
+            PlayerPrefsManager.SetStatPoints(statPoints);
+      }
     }
 
     public void LevelSpeed()
     {
-        modSpeed++;
-        PlayerPrefsManager.SetSpeedMod(modSpeed);
-        DetermineSpeed();
+        if (statPoints > 0)
+        {
+            modSpeed++;
+            PlayerPrefsManager.SetSpeedMod(modSpeed);
+            DetermineSpeed();
+            statPoints--;
+            PlayerPrefsManager.SetStatPoints(statPoints);
+        }
     }
 
     public void LevelEndurance()
     {
-        modEndurance++;
-        PlayerPrefsManager.SetEnduranceMod(modEndurance);
-        DetermineEndurance();
-        DetermineHealth();
+        if (statPoints > 0)
+        {
+            modEndurance++;
+            PlayerPrefsManager.SetEnduranceMod(modEndurance);
+            DetermineEndurance();
+            DetermineHealth();
+            statPoints--;
+            PlayerPrefsManager.SetStatPoints(statPoints);
+        }
     }
 
     public void LevelSpirit()
     {
-        modSpirit++;
-        PlayerPrefsManager.SetSpiritMod(modSpirit);
-        DetermineSpirit();
-        DetermineKi();
+        if (statPoints > 0)
+        {
+            modSpirit++;
+            PlayerPrefsManager.SetSpiritMod(modSpirit);
+            DetermineSpirit();
+            DetermineKi();
+            statPoints--;
+            PlayerPrefsManager.SetStatPoints(statPoints);
+        }
     }
 
     public void ResetStats()
@@ -116,6 +185,14 @@ public class PlayerAbilities : MonoBehaviour {
         modSpeed = 0;
         modEndurance = 0;
         modSpirit = 0;
+        playerLevel = 1;
+        experiencePoints = 0;
+        statPoints = 0;
+        experienceThreshold = playerLevel * 500;
+        PlayerPrefsManager.SetPlayerLevel(playerLevel);
+        PlayerPrefsManager.SetExperiencePoints(experiencePoints);
+        PlayerPrefsManager.SetStatPoints(statPoints);
+        DetermineLevel();
         PlayerPrefsManager.SetStrengthMod(modStrength);
         DetermineStrength();
         PlayerPrefsManager.SetSpeedMod(modSpeed);
@@ -134,5 +211,8 @@ public class PlayerAbilities : MonoBehaviour {
         modSpeed = PlayerPrefsManager.GetSpeedMod();
         modEndurance = PlayerPrefsManager.GetEnduranceMod();
         modSpirit = PlayerPrefsManager.GetSpiritMod();
+        experiencePoints = PlayerPrefsManager.GetExperiencePoints();
+        statPoints = PlayerPrefsManager.GetStatPoints();
+        DetermineLevel();            
     }
 }

@@ -7,6 +7,7 @@ public class PlayerStats : MonoBehaviour {
 
     private Animator pAnim;
     private Animator eAnim;
+    private EnemyStats enemyStats;
 
     public PlayerAbilities playerAbilities;
     public GameObject enemy;
@@ -31,6 +32,7 @@ public class PlayerStats : MonoBehaviour {
     {
         eAnim = enemy.GetComponent<Animator>();
         pAnim = GetComponent<Animator>();
+        enemyStats = GameObject.FindObjectOfType<EnemyStats>();
         GetStats();
         print(maxHealth);
         print(maxKi);        
@@ -87,6 +89,7 @@ public class PlayerStats : MonoBehaviour {
         else if (hitValue > enemyDodge)
         {
             EnemyStats.currentHealth = EnemyStats.currentHealth - damage * attackBoost;
+            enemyStats.HealthChecker();
             eAnim.SetTrigger("isDamaged");
         }
     }
@@ -107,6 +110,7 @@ public class PlayerStats : MonoBehaviour {
         else if (hitValue > enemyDodge)
         {
             EnemyStats.currentHealth = EnemyStats.currentHealth - damage * 2.5f * attackBoost;
+            enemyStats.HealthChecker();
             eAnim.SetTrigger("isDamaged");
         }
     }
@@ -134,6 +138,7 @@ public class PlayerStats : MonoBehaviour {
         else if (hitValue > enemyDodge)
         {
             EnemyStats.currentHealth = EnemyStats.currentHealth - sDamage * 3f * attackBoost;
+            enemyStats.HealthChecker();
             eAnim.SetTrigger("isDamaged");
         }
     }
@@ -168,6 +173,7 @@ public class PlayerStats : MonoBehaviour {
         else if (hitValue > enemyDodge)
         {
             EnemyStats.currentHealth = EnemyStats.currentHealth - sDamage * 1f * attackBoost;
+            enemyStats.HealthChecker();
             eAnim.SetTrigger("isDamaged");
         }
     }
