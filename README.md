@@ -16,9 +16,9 @@ Have fun and wish me luck!
 
 
 
-Next updates: Experience + Status points
+Next updates: Power Boost System
 
-Update (10/9/17) - Added the Credits screen, available from the options menu. Added the stats screen, available from the title menu.
+Update (10/9/17) - Added the Credits screen, available from the options menu. Added the stats screen, available from the title menu. Experience system added with Stat Points. 0.1.2 build up.
 
 Update (8/9/17) - Now back from holidays! Currently focusing on finding a new job, but I'll try to keep updating here. Also planning to start noting down the next project goals here in the README for your (and my) convenience.
 
