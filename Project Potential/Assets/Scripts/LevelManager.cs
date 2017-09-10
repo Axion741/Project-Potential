@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void LoadLevel(string name) {
-        if (SceneManager.GetActiveScene().buildIndex == 2)
+        if (SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 4)
         {
             cameFromOptionsMenu = true;
             Debug.Log("Came from Options True)");

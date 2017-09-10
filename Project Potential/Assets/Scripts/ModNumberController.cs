@@ -45,24 +45,24 @@ public class ModNumberController : MonoBehaviour {
     public void StrengthText()
     {
         strengthMod = PlayerPrefsManager.GetStrengthMod();
-        text.text = (strengthMod.ToString());
+        text.text = ("<Color=#00ff00ff>+" + strengthMod.ToString() + "</Color>");
     }
 
     public void SpeedText()
     {
         speedMod = PlayerPrefsManager.GetSpeedMod();
-        text.text = (speedMod.ToString());
+        text.text = ("<Color=#00ff00ff>+" + speedMod.ToString() + "</Color>");
     }
 
     public void EnduranceText()
     {
         enduranceMod = PlayerPrefsManager.GetEnduranceMod();
-        text.text = (enduranceMod.ToString());
+        text.text = ("<Color=#00ff00ff>+" + enduranceMod.ToString() + "</Color>");
     }
 
     public void SpiritText()
     {
         spiritMod = PlayerPrefsManager.GetSpiritMod();
-        text.text = (spiritMod.ToString());
+        text.text = ("<Color=#00ff00ff>+" + spiritMod.ToString() + "</Color>");
     }
 }
