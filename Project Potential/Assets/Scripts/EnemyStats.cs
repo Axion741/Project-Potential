@@ -167,7 +167,6 @@ public class EnemyStats : MonoBehaviour {
     {
         //Generate a number and use to determine which attack to use.
         choice = Random.Range(min, max);
-        print("choice is" + choice);
         if (choice <= 20)
         {
             KickAttack();

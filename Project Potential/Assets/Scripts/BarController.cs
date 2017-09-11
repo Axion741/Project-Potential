@@ -20,10 +20,27 @@ public class BarController : MonoBehaviour {
     [SerializeField]
     private Image enemyKiBar;
 
+    [SerializeField]
+    private Image powerBar1;
+
+    [SerializeField]
+    private Image powerBar2;
+
+    [SerializeField]
+    private Image powerBar3;
+
+    public GameObject powerBarLevel1;
+    public GameObject powerBarLevel2;
+    public GameObject powerBarLevel3;
+
+    private int breakPoint;
+    private PlayerAbilities playerAbilities;
+
 
     // Use this for initialization
     void Start () {
-		
+        playerAbilities = FindObjectOfType<PlayerAbilities>();
+        breakPoint = playerAbilities.breakPoint;
 	}
 	
 	// Update is called once per frame
@@ -32,7 +49,9 @@ public class BarController : MonoBehaviour {
         PlayerKiBar();
         EnemyKiBar();
         EnemyHealthBar();
-	}
+        PowerBarController();
+        breakPoint = playerAbilities.breakPoint;
+    }
 
     private void PlayerHealthBar()
     {
@@ -56,5 +75,48 @@ public class BarController : MonoBehaviour {
     {
         fillValue = EnemyStats.currentKi / EnemyStats.maxKi;
         enemyKiBar.fillAmount = Mathf.Lerp(enemyKiBar.fillAmount, fillValue, Time.deltaTime * barSpeed);
+    }
+
+    private void PowerBarController()
+    {
+        if (breakPoint == 0)
+        {
+            powerBarLevel1.SetActive(true);
+            powerBarLevel2.SetActive(false);
+            powerBarLevel3.SetActive(false);
+            PowerBar1();
+        }
+        else if (breakPoint == 1)
+        {
+            powerBarLevel1.SetActive(false);
+            powerBarLevel2.SetActive(true);
+            powerBarLevel3.SetActive(false);
+            PowerBar2();
+        }
+        else if (breakPoint == 2)
+        {
+            powerBarLevel1.SetActive(false);
+            powerBarLevel2.SetActive(false);
+            powerBarLevel3.SetActive(true);
+            PowerBar3();
+        }
+    }
+
+    private void PowerBar1()
+    {
+        fillValue = PlayerStats.currentPP / PlayerStats.maxPP;
+        powerBar1.fillAmount = Mathf.Lerp(powerBar1.fillAmount, fillValue, Time.deltaTime * barSpeed);
+    }
+
+    private void PowerBar2()
+    {
+        fillValue = PlayerStats.currentPP / PlayerStats.maxPP;
+        powerBar2.fillAmount = Mathf.Lerp(powerBar2.fillAmount, fillValue, Time.deltaTime * barSpeed);
+    }
+
+    private void PowerBar3()
+    {
+        fillValue = PlayerStats.currentPP / PlayerStats.maxPP;
+        powerBar3.fillAmount = Mathf.Lerp(powerBar3.fillAmount, fillValue, Time.deltaTime * barSpeed);
     }
 }

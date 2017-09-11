@@ -14,6 +14,7 @@ public class PlayerAbilities : MonoBehaviour {
     public int currentSpeed;
     public int currentEndurance;
     public int currentSpirit;
+    public int breakPoint;
 
     public int modStrength;
     public int modSpeed;
@@ -22,6 +23,7 @@ public class PlayerAbilities : MonoBehaviour {
 
     public float maxHealth;
     public float maxKi;
+    public float maxPP;
 
     public float physicalDamage;
     public float spiritDamage;
@@ -41,6 +43,7 @@ public class PlayerAbilities : MonoBehaviour {
         DetermineSpeed();
         DetermineHealth();
         DetermineKi();
+        DeterminePP();
         LevelUp();
   	}
 	
@@ -103,6 +106,11 @@ public class PlayerAbilities : MonoBehaviour {
     {
         maxKi = currentSpirit * 10;
        
+    }
+
+    public void DeterminePP()
+    {
+        maxPP = 5 * (breakPoint + 1);
     }
 
     public void DetermineStrength()

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerStats : MonoBehaviour {
+public class PlayerStats : MonoBehaviour
+{
 
     private Animator pAnim;
     private Animator eAnim;
@@ -19,14 +20,20 @@ public class PlayerStats : MonoBehaviour {
     public static float maxHealth;
     public static float currentKi;
     public static float maxKi;
+    public static float currentPP;
+    public static float maxPP;
 
     private float damage;
     private float sDamage;
     private float attackBoost = 1f;
     private float hitValue;
     private float enemyDodge;
-    
-    
+    private float breakChance = 5;
+    private float choice;
+    private float min = 1;
+    private float max = 100;
+
+
 
     // Use this for initialization
     void Start()
@@ -35,13 +42,14 @@ public class PlayerStats : MonoBehaviour {
         pAnim = GetComponent<Animator>();
         enemyStats = GameObject.FindObjectOfType<EnemyStats>();
         resultsController = FindObjectOfType<ResultsController>();
-        GetStats();     
+        GetStats();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("currentHealth = " + currentHealth);
+        Debug.Log("Choice = " + choice + ", BreakChance = " + breakChance);
+        Debug.Log("currentPP = " + currentPP);
 
         if (currentHealth > maxHealth)
         {
@@ -65,6 +73,8 @@ public class PlayerStats : MonoBehaviour {
         currentKi = maxKi;
         damage = playerAbilities.physicalDamage;
         sDamage = playerAbilities.spiritDamage;
+        maxPP = playerAbilities.maxPP;
+        currentPP = 0;
     }
 
     private void HitChecker()
@@ -153,7 +163,7 @@ public class PlayerStats : MonoBehaviour {
         }
         else
         {
-            
+
             pAnim.SetTrigger("isBarrage");
         }
     }
@@ -183,7 +193,8 @@ public class PlayerStats : MonoBehaviour {
     public void PowerUp()
     {
         pAnim.SetTrigger("isPowerUp");
-        currentKi += 20;
+        KiBoost();
+        LimitBreak();
         attackBoost = attackBoost + 0.1f;
         //TurnController.TurnChange();
     }
@@ -202,4 +213,51 @@ public class PlayerStats : MonoBehaviour {
     {
         TurnController.QuickHide();
     }
+
+    private void KiBoost()
+    {
+        if (currentKi != maxKi)
+        {
+            currentKi += 20;
+        }
+        else if (currentKi >= maxKi - 20)
+        {
+            currentKi = maxKi;
+        }
+
+    }
+
+    private void LimitBreak()
+    {
+        if (currentPP != maxPP)
+        {
+            currentPP = currentPP + 1;
+        }
+        else if (currentPP == maxPP)
+        {
+            //Generate number between 1/100 to compare to breakChance
+            choice = Random.Range(min, max);
+
+            if (playerAbilities.breakPoint < 2)
+            {
+                
+                if (choice <= breakChance)
+                {
+                    playerAbilities.breakPoint++;
+                    breakChance = 5;
+                    playerAbilities.DeterminePP();
+                    maxPP = playerAbilities.maxPP;
+                }
+                else if (choice > breakChance)
+                {
+                    breakChance += 5;
+                }
+            else{
+                    breakChance = 0;
+                }
+
+            }
+        }
+    }
+
 }
