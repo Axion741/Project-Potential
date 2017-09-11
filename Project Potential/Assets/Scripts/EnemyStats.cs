@@ -7,6 +7,7 @@ public class EnemyStats : MonoBehaviour {
     private Animator eAnim;
     private Animator pAnim;
     private GameObject pBlast;
+    private ResultsController resultsController;
 
     public PlayerAbilities playerAbilities;
     public GameObject player;
@@ -31,6 +32,7 @@ public class EnemyStats : MonoBehaviour {
     void Start () {
         pAnim = player.GetComponent<Animator>();
         eAnim = GetComponent<Animator>();
+        resultsController = FindObjectOfType<ResultsController>();
         currentHealth = maxHealth;
         currentKi = maxKi;
 	}
@@ -215,6 +217,7 @@ public class EnemyStats : MonoBehaviour {
         else if (currentHealth <= 0)
         {
             eAnim.SetBool("isDead", true);
+            resultsController.WinFight();
             playerAbilities.experiencePoints = playerAbilities.experiencePoints + 500;
             playerAbilities.SetExperience();
         }

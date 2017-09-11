@@ -41,7 +41,6 @@ public class PlayerAbilities : MonoBehaviour {
         DetermineSpeed();
         DetermineHealth();
         DetermineKi();
-        print(experiencePoints);
         LevelUp();
   	}
 	

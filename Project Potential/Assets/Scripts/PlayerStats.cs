@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour {
     private Animator pAnim;
     private Animator eAnim;
     private EnemyStats enemyStats;
+    private ResultsController resultsController;
 
     public PlayerAbilities playerAbilities;
     public GameObject enemy;
@@ -33,9 +34,8 @@ public class PlayerStats : MonoBehaviour {
         eAnim = enemy.GetComponent<Animator>();
         pAnim = GetComponent<Animator>();
         enemyStats = GameObject.FindObjectOfType<EnemyStats>();
-        GetStats();
-        print(maxHealth);
-        print(maxKi);        
+        resultsController = FindObjectOfType<ResultsController>();
+        GetStats();     
     }
 
     // Update is called once per frame
@@ -50,6 +50,8 @@ public class PlayerStats : MonoBehaviour {
         else if (currentHealth <= 0)
         {
             pAnim.SetBool("isDead", true);
+            resultsController.LoseFight();
+
         }
     }
 
