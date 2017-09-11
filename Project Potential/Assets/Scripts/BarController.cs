@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BarController : MonoBehaviour {
     
     private float fillValue;
+    private float barSpeed = 4;
 
     [SerializeField]
     private Image playerHealthBar;
@@ -36,24 +37,24 @@ public class BarController : MonoBehaviour {
     private void PlayerHealthBar()
     {
         fillValue = PlayerStats.currentHealth /PlayerStats.maxHealth;
-        playerHealthBar.fillAmount = fillValue;
+        playerHealthBar.fillAmount = Mathf.Lerp(playerHealthBar.fillAmount, fillValue, Time.deltaTime*barSpeed);
     }
 
     private void PlayerKiBar()
     {
         fillValue = PlayerStats.currentKi / PlayerStats.maxKi;
-        playerKiBar.fillAmount = fillValue;
+        playerKiBar.fillAmount = Mathf.Lerp(playerKiBar.fillAmount, fillValue, Time.deltaTime * barSpeed);
     }
 
     private void EnemyHealthBar()
     {
         fillValue = EnemyStats.currentHealth / EnemyStats.maxHealth;
-        enemyHealthBar.fillAmount = fillValue;
+        enemyHealthBar.fillAmount = Mathf.Lerp(enemyHealthBar.fillAmount, fillValue, Time.deltaTime * barSpeed);
     }
 
     private void EnemyKiBar()
     {
         fillValue = EnemyStats.currentKi / EnemyStats.maxKi;
-        enemyKiBar.fillAmount = fillValue;
+        enemyKiBar.fillAmount = Mathf.Lerp(enemyKiBar.fillAmount, fillValue, Time.deltaTime * barSpeed);
     }
 }
