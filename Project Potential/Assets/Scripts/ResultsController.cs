@@ -10,7 +10,7 @@ public class ResultsController : MonoBehaviour {
     public Text pointMessage;
     private PlayerAbilities playerAbilities;
     private EnemyStats enemyStats;
-    private BarController barController;
+
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +18,7 @@ public class ResultsController : MonoBehaviour {
         resultsCanvas.enabled = false;
         playerAbilities = FindObjectOfType<PlayerAbilities>();
         enemyStats = FindObjectOfType<EnemyStats>();
-        barController = FindObjectOfType<BarController>();
+
 	}
 	
 	// Update is called once per frame
