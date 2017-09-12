@@ -16,9 +16,9 @@ Have fun and wish me luck!
 
 
 
-Next updates: End of battle EXP bar + MOAR FIGHTS
+Next updates: MOAR FIGHTS
 
-Update (12/9/17) - Power System complete w/ basic Transformations tied into damage mechanics. Probably needs more balancing. 
+Update (12/9/17) - Power System complete w/ basic Transformations tied into damage mechanics. Probably needs more balancing. Added EXP bar to end of fights after a LOT of tears. Not happy with it but it'll do for now. Extra fights delayed for the moment. New release up!
 
 Update (11/9/17) - Added Power Bar and basis of the Power system. Hopefully will be finished tomorrow with Transformations too! Fingers crossed for another release.
 
