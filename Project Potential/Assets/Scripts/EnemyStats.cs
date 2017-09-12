@@ -24,6 +24,9 @@ public class EnemyStats : MonoBehaviour {
     public static float maxHealth = 100;
     public static float currentKi;
     public static float maxKi = 100;
+
+    public float experienceValue;
+
     private float damage = 10;
     private float attackBoost = 1f;
 
@@ -217,8 +220,6 @@ public class EnemyStats : MonoBehaviour {
         {
             eAnim.SetBool("isDead", true);
             resultsController.WinFight();
-            playerAbilities.experiencePoints = playerAbilities.experiencePoints + 500;
-            playerAbilities.SetExperience();
         }
     }
 

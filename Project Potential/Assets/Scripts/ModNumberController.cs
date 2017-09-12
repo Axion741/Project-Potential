@@ -13,7 +13,7 @@ public class ModNumberController : MonoBehaviour {
     private int spiritMod;
     private int playerLevel;
     private int statPoints;
-    private int experiencePoints;
+    private float experiencePoints;
 
     private PlayerAbilities playerAbilities;
 

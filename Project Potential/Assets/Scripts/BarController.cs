@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BarController : MonoBehaviour {
     
     private float fillValue;
+    public float xpFill;
     private float barSpeed = 4;
 
     [SerializeField]
@@ -29,6 +30,8 @@ public class BarController : MonoBehaviour {
     [SerializeField]
     private Image powerBar3;
 
+    public Image expBar;
+
     public GameObject powerBarLevel1;
     public GameObject powerBarLevel2;
     public GameObject powerBarLevel3;
@@ -36,6 +39,7 @@ public class BarController : MonoBehaviour {
     private int breakPoint;
     private PlayerAbilities playerAbilities;
     private PlayerStats playerStats;
+    private EnemyStats enemyStats;
 
 
     // Use this for initialization
@@ -47,12 +51,16 @@ public class BarController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         PlayerHealthBar();
         PlayerKiBar();
         EnemyKiBar();
         EnemyHealthBar();
         PowerBarController();
+        EXPBarWin();
         breakPoint = playerAbilities.breakPoint;
+        Debug.Log("AbExp = " + playerAbilities.experiencePoints);;
+        Debug.Log("AbThresh = " + playerAbilities.experienceThreshold);
     }
 
     private void PlayerHealthBar()
@@ -147,4 +155,16 @@ public class BarController : MonoBehaviour {
             playerStats.Transformation2();
         }
     }
+
+    public void EXPBarWin()
+    {
+        xpFill = playerAbilities.experiencePoints / playerAbilities.experienceThreshold;
+        Debug.Log("xpfv = " + xpFill);
+        expBar.fillAmount = Mathf.Lerp(expBar.fillAmount, xpFill, Time.deltaTime * barSpeed);
+    }
+
+
+
+
+
 }

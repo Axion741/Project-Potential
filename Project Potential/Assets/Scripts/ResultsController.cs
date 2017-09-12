@@ -7,16 +7,23 @@ public class ResultsController : MonoBehaviour {
 
     public Canvas resultsCanvas;
     public Text titleText;
+    public Text pointMessage;
+    private PlayerAbilities playerAbilities;
+    private EnemyStats enemyStats;
+    private BarController barController;
 
 	// Use this for initialization
 	void Start () {
         resultsCanvas = resultsCanvas.GetComponent<Canvas>();
         resultsCanvas.enabled = false;
+        playerAbilities = FindObjectOfType<PlayerAbilities>();
+        enemyStats = FindObjectOfType<EnemyStats>();
+        barController = FindObjectOfType<BarController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
     public void ResultCanvasEnabler()
@@ -28,11 +35,19 @@ public class ResultsController : MonoBehaviour {
     {
         titleText.text = "Victory!";
         ResultCanvasEnabler();
+        playerAbilities.experiencePoints = playerAbilities.experiencePoints + enemyStats.experienceValue;
+        playerAbilities.SetExperience();
+
     }
 
     public void LoseFight()
     {
         titleText.text = "Defeat!";
         ResultCanvasEnabler();
+    }
+
+    public void TextEnabler()
+    {
+        pointMessage.enabled = true;
     }
 }

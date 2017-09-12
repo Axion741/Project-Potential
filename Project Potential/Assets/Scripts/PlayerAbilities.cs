@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerAbilities : MonoBehaviour {
 
+    private ResultsController resController;
+
     private int baseStrength = 10;
     private int baseSpeed = 10;
     private int baseEndurance = 10;
     private int baseSpirit = 10;
-    private int playerLevel;
+    public int playerLevel;
 
     public int currentStrength;
     public int currentSpeed;
@@ -29,8 +31,8 @@ public class PlayerAbilities : MonoBehaviour {
     public float spiritDamage;
     public float evasionChance;
 
-    public int experiencePoints;
-    public int experienceThreshold;
+    public float experiencePoints;
+    public float experienceThreshold;
     public int statPoints;
     public int breakChanceReset = 5;
 
@@ -46,6 +48,7 @@ public class PlayerAbilities : MonoBehaviour {
         DetermineKi();
         DeterminePP();
         LevelUp();
+        resController = FindObjectOfType<ResultsController>();
   	}
 	
 	// Update is called once per frame
@@ -55,7 +58,7 @@ public class PlayerAbilities : MonoBehaviour {
 
     public void LevelTester()
     {
-        experiencePoints = experiencePoints + 10000;
+        experiencePoints = experiencePoints + 500;
         SetExperience();
     }
 
@@ -71,6 +74,7 @@ public class PlayerAbilities : MonoBehaviour {
             PlayerPrefsManager.SetStatPoints(statPoints);
             PlayerPrefsManager.SetPlayerLevel(playerLevel);
             PlayerPrefsManager.SetExperiencePoints(experiencePoints);
+            resController.TextEnabler();
             print("exp to next = " + experienceThreshold);
             print("current stat points = " + statPoints);
         }

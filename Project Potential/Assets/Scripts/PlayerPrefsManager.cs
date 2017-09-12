@@ -130,14 +130,14 @@ public class PlayerPrefsManager : MonoBehaviour {
         return PlayerPrefs.GetInt(LEVEL);
     }
 
-    public static void SetExperiencePoints(int experiencePoints)
+    public static void SetExperiencePoints(float experiencePoints)
     {
-        PlayerPrefs.SetInt(EXPERIENCE, experiencePoints);
+        PlayerPrefs.SetFloat(EXPERIENCE, experiencePoints);
     }
 
-    public static int GetExperiencePoints()
+    public static float GetExperiencePoints()
     {
-        return PlayerPrefs.GetInt(EXPERIENCE);
+        return PlayerPrefs.GetFloat(EXPERIENCE);
     }
 
     public static void SetStatPoints(int statPoints)
