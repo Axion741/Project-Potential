@@ -35,11 +35,13 @@ public class BarController : MonoBehaviour {
 
     private int breakPoint;
     private PlayerAbilities playerAbilities;
+    private PlayerStats playerStats;
 
 
     // Use this for initialization
     void Start () {
         playerAbilities = FindObjectOfType<PlayerAbilities>();
+        playerStats = FindObjectOfType<PlayerStats>();
         breakPoint = playerAbilities.breakPoint;
 	}
 	
@@ -106,17 +108,43 @@ public class BarController : MonoBehaviour {
     {
         fillValue = PlayerStats.currentPP / PlayerStats.maxPP;
         powerBar1.fillAmount = Mathf.Lerp(powerBar1.fillAmount, fillValue, Time.deltaTime * barSpeed);
+        playerStats.Transformation0();
     }
 
     private void PowerBar2()
     {
         fillValue = PlayerStats.currentPP / PlayerStats.maxPP;
         powerBar2.fillAmount = Mathf.Lerp(powerBar2.fillAmount, fillValue, Time.deltaTime * barSpeed);
+        if (fillValue <= 0.5)
+        {
+            powerBar2.color = new Color32(122, 243, 255, 255);
+            playerStats.Transformation0();
+        }
+        else if (fillValue > 0.5)
+        {
+            powerBar2.color = new Color32(178, 0, 0, 255);
+            playerStats.Transformation1();
+        }
     }
 
     private void PowerBar3()
     {
         fillValue = PlayerStats.currentPP / PlayerStats.maxPP;
         powerBar3.fillAmount = Mathf.Lerp(powerBar3.fillAmount, fillValue, Time.deltaTime * barSpeed);
+        if (fillValue <= 0.33333333)
+        {
+            powerBar3.color = new Color32(122, 243, 255, 255);
+            playerStats.Transformation0();
+        }
+        else if (fillValue > 0.34 && fillValue <= 0.666666)
+        {
+            powerBar3.color = new Color32(178, 0, 0, 255);
+            playerStats.Transformation1();
+        }
+        else if (fillValue > 0.67)
+        {
+            powerBar3.color = new Color32(255, 255, 0, 255);
+            playerStats.Transformation2();
+        }
     }
 }

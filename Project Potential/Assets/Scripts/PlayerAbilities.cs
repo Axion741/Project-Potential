@@ -32,6 +32,7 @@ public class PlayerAbilities : MonoBehaviour {
     public int experiencePoints;
     public int experienceThreshold;
     public int statPoints;
+    public int breakChanceReset = 5;
 
     // Use this for initialization
     void Start ()
@@ -54,7 +55,7 @@ public class PlayerAbilities : MonoBehaviour {
 
     public void LevelTester()
     {
-        experiencePoints = experiencePoints + 500;
+        experiencePoints = experiencePoints + 10000;
         SetExperience();
     }
 
@@ -195,6 +196,9 @@ public class PlayerAbilities : MonoBehaviour {
         playerLevel = 1;
         experiencePoints = 0;
         statPoints = 0;
+        breakPoint = 0;
+        PlayerPrefsManager.SetBreakPoint(breakPoint);
+        PlayerPrefsManager.SetBreakChance(breakChanceReset);
         experienceThreshold = playerLevel * 500;
         PlayerPrefsManager.SetPlayerLevel(playerLevel);
         PlayerPrefsManager.SetExperiencePoints(experiencePoints);
@@ -220,6 +224,7 @@ public class PlayerAbilities : MonoBehaviour {
         modSpirit = PlayerPrefsManager.GetSpiritMod();
         experiencePoints = PlayerPrefsManager.GetExperiencePoints();
         statPoints = PlayerPrefsManager.GetStatPoints();
+        breakPoint = PlayerPrefsManager.GetBreakPoint();
         DetermineLevel();            
     }
 }

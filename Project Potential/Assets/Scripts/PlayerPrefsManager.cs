@@ -15,6 +15,8 @@ public class PlayerPrefsManager : MonoBehaviour {
     const string LEVEL = "player_level";
     const string EXPERIENCE = "experience_points";
     const string STATPOINTS = "stat_points";
+    const string BREAKPOINT = "break_point";
+    const string BREAKCHANCE = "break_chance";
    
 
     public static void SetMasterVolume (float volume)
@@ -146,5 +148,25 @@ public class PlayerPrefsManager : MonoBehaviour {
     public static int GetStatPoints()
     {
         return PlayerPrefs.GetInt(STATPOINTS);
+    }
+
+    public static void SetBreakPoint(int breakPoint)
+    {
+        PlayerPrefs.SetInt(BREAKPOINT, breakPoint);
+    }
+
+    public static int GetBreakPoint()
+    {
+        return PlayerPrefs.GetInt(BREAKPOINT);
+    }
+
+    public static void SetBreakChance(int breakChance)
+    {
+        PlayerPrefs.SetInt(BREAKCHANCE, breakChance);
+    }
+
+    public static int GetBreakChance()
+    {
+        return PlayerPrefs.GetInt(BREAKCHANCE);
     }
 }

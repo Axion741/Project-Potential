@@ -10,10 +10,14 @@ public class PlayerStats : MonoBehaviour
     private Animator eAnim;
     private EnemyStats enemyStats;
     private ResultsController resultsController;
+    private SpriteRenderer frontRender;
+    private SpriteRenderer backRender;
 
     public PlayerAbilities playerAbilities;
     public GameObject enemy;
     public GameObject blast;
+    public GameObject auraFront;
+    public GameObject auraBack;
 
 
     public static float currentHealth;
@@ -26,9 +30,10 @@ public class PlayerStats : MonoBehaviour
     private float damage;
     private float sDamage;
     private float attackBoost = 1f;
+    private float tMultiplier = 1;
     private float hitValue;
     private float enemyDodge;
-    private float breakChance = 5;
+    private int breakChance = 5;
     private float choice;
     private float min = 1;
     private float max = 100;
@@ -43,6 +48,8 @@ public class PlayerStats : MonoBehaviour
         enemyStats = GameObject.FindObjectOfType<EnemyStats>();
         resultsController = FindObjectOfType<ResultsController>();
         GetStats();
+        frontRender = auraFront.GetComponent<SpriteRenderer>();
+        backRender = auraBack.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -75,6 +82,7 @@ public class PlayerStats : MonoBehaviour
         sDamage = playerAbilities.spiritDamage;
         maxPP = playerAbilities.maxPP;
         currentPP = 0;
+        breakChance = PlayerPrefsManager.GetBreakChance();
     }
 
     private void HitChecker()
@@ -100,7 +108,7 @@ public class PlayerStats : MonoBehaviour
         }
         else if (hitValue > enemyDodge)
         {
-            EnemyStats.currentHealth = EnemyStats.currentHealth - damage * attackBoost;
+            EnemyStats.currentHealth = EnemyStats.currentHealth - damage * tMultiplier * attackBoost;
             enemyStats.HealthChecker();
             eAnim.SetTrigger("isDamaged");
         }
@@ -121,7 +129,7 @@ public class PlayerStats : MonoBehaviour
         }
         else if (hitValue > enemyDodge)
         {
-            EnemyStats.currentHealth = EnemyStats.currentHealth - damage * 2.5f * attackBoost;
+            EnemyStats.currentHealth = EnemyStats.currentHealth - damage * 2.5f * tMultiplier * attackBoost;
             enemyStats.HealthChecker();
             eAnim.SetTrigger("isDamaged");
         }
@@ -149,7 +157,7 @@ public class PlayerStats : MonoBehaviour
         }
         else if (hitValue > enemyDodge)
         {
-            EnemyStats.currentHealth = EnemyStats.currentHealth - sDamage * 3f * attackBoost;
+            EnemyStats.currentHealth = EnemyStats.currentHealth - sDamage * 3f * tMultiplier* attackBoost;
             enemyStats.HealthChecker();
             eAnim.SetTrigger("isDamaged");
         }
@@ -184,7 +192,7 @@ public class PlayerStats : MonoBehaviour
         }
         else if (hitValue > enemyDodge)
         {
-            EnemyStats.currentHealth = EnemyStats.currentHealth - sDamage * 1f * attackBoost;
+            EnemyStats.currentHealth = EnemyStats.currentHealth - sDamage * 1f * tMultiplier * attackBoost;
             enemyStats.HealthChecker();
             eAnim.SetTrigger("isDamaged");
         }
@@ -195,13 +203,28 @@ public class PlayerStats : MonoBehaviour
         pAnim.SetTrigger("isPowerUp");
         KiBoost();
         LimitBreak();
-        attackBoost = attackBoost + 0.1f;
+        attackBoost = 1 + (currentPP / 10);
         //TurnController.TurnChange();
     }
 
-    public void BoostReset()
+    public void MeleeReset()
     {
-        attackBoost = 1;
+        if (currentPP != 0)
+        {
+            currentPP -= 1;
+        }
+        else return;
+    }
+
+    public void EnergyReset()
+    {
+        if (currentPP >= 2)
+        {
+            currentPP -= 2;
+        }else if (currentPP < 2)
+        {
+            currentPP = 0;
+        }
     }
 
     private void TurnChanger()
@@ -244,13 +267,17 @@ public class PlayerStats : MonoBehaviour
                 if (choice <= breakChance)
                 {
                     playerAbilities.breakPoint++;
+                    PlayerPrefsManager.SetBreakPoint(playerAbilities.breakPoint);
                     breakChance = 5;
+                    PlayerPrefsManager.SetBreakChance(breakChance);
                     playerAbilities.DeterminePP();
                     maxPP = playerAbilities.maxPP;
+                    currentPP += 1;
                 }
                 else if (choice > breakChance)
                 {
                     breakChance += 5;
+                    PlayerPrefsManager.SetBreakChance(breakChance);
                 }
             else{
                     breakChance = 0;
@@ -258,6 +285,27 @@ public class PlayerStats : MonoBehaviour
 
             }
         }
+    }
+
+    public void Transformation0()
+    {
+        frontRender.color = new Color32(122, 243, 255, 255);
+        backRender.color = new Color32(122, 243, 255, 255);
+        tMultiplier = 1;
+    }
+
+    public void Transformation1()
+    {
+        frontRender.color = new Color32(178, 0, 0, 255);
+        backRender.color = new Color32(178, 0, 0, 255);
+        tMultiplier = 2;
+    }
+
+    public void Transformation2()
+    {
+        frontRender.color = new Color32(255, 255, 0, 255);
+        backRender.color = new Color32(255, 255, 0, 255);
+        tMultiplier = 4;
     }
 
 }
