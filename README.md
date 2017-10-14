@@ -16,7 +16,9 @@ Have fun and wish me luck!
 
 
 
-Next updates: MOAR FIGHTS
+Next updates: Sound effects and Transformation Overhaul (maybe?)
+
+Update (14/10/17) - Sorry for the delay! Been concentrating on the job hunt and looking after myself. Level Select and fights are in! Boss has some unique animation. Probably has massive balance issues for now. Release soon-ish, not far off gold release now. 
 
 Update (12/9/17) - Power System complete w/ basic Transformations tied into damage mechanics. Probably needs more balancing. Added EXP bar to end of fights after a LOT of tears. Not happy with it but it'll do for now. Extra fights delayed for the moment. New release up!
 
