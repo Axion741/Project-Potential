@@ -47,6 +47,7 @@ public class BarController : MonoBehaviour {
         playerAbilities = FindObjectOfType<PlayerAbilities>();
         playerStats = FindObjectOfType<PlayerStats>();
         breakPoint = playerAbilities.breakPoint;
+        enemyStats = FindObjectOfType<EnemyStats>();
 	}
 	
 	// Update is called once per frame
@@ -77,13 +78,13 @@ public class BarController : MonoBehaviour {
 
     private void EnemyHealthBar()
     {
-        fillValue = EnemyStats.currentHealth / EnemyStats.maxHealth;
+        fillValue = enemyStats.currentHealth / enemyStats.maxHealth;
         enemyHealthBar.fillAmount = Mathf.Lerp(enemyHealthBar.fillAmount, fillValue, Time.deltaTime * barSpeed);
     }
 
     private void EnemyKiBar()
     {
-        fillValue = EnemyStats.currentKi / EnemyStats.maxKi;
+        fillValue = enemyStats.currentKi / enemyStats.maxKi;
         enemyKiBar.fillAmount = Mathf.Lerp(enemyKiBar.fillAmount, fillValue, Time.deltaTime * barSpeed);
     }
 

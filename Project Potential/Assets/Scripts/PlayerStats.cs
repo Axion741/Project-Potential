@@ -108,7 +108,7 @@ public class PlayerStats : MonoBehaviour
         }
         else if (hitValue > enemyDodge)
         {
-            EnemyStats.currentHealth = EnemyStats.currentHealth - damage * tMultiplier * attackBoost;
+            enemyStats.currentHealth = enemyStats.currentHealth - damage * tMultiplier * attackBoost;
             eAnim.SetTrigger("isDamaged");
             enemyStats.HealthChecker();
         }
@@ -129,7 +129,7 @@ public class PlayerStats : MonoBehaviour
         }
         else if (hitValue > enemyDodge)
         {
-            EnemyStats.currentHealth = EnemyStats.currentHealth - damage * 2.5f * tMultiplier * attackBoost;
+            enemyStats.currentHealth = enemyStats.currentHealth - damage * 2.5f * tMultiplier * attackBoost;
             eAnim.SetTrigger("isDamaged");
             enemyStats.HealthChecker();
         }
@@ -157,7 +157,7 @@ public class PlayerStats : MonoBehaviour
         }
         else if (hitValue > enemyDodge)
         {
-            EnemyStats.currentHealth = EnemyStats.currentHealth - sDamage * 3f * tMultiplier* attackBoost;
+            enemyStats.currentHealth = enemyStats.currentHealth - sDamage * 3f * tMultiplier* attackBoost;
             eAnim.SetTrigger("isDamaged");
             enemyStats.HealthChecker();
         }
@@ -192,7 +192,7 @@ public class PlayerStats : MonoBehaviour
         }
         else if (hitValue > enemyDodge)
         {
-            EnemyStats.currentHealth = EnemyStats.currentHealth - sDamage * 1f * tMultiplier * attackBoost;
+            enemyStats.currentHealth = enemyStats.currentHealth - sDamage * 1f * tMultiplier * attackBoost;
             eAnim.SetTrigger("isDamaged");
             enemyStats.HealthChecker();
         }

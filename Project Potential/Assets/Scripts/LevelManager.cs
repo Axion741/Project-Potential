@@ -18,18 +18,27 @@ public class LevelManager : MonoBehaviour {
 
     }
 
-    public void LoadLevel(string name) {
-        if (SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 4)
+    public void LoadStart(string name) //USE IF LOADING TO START SCREEN
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 4 || SceneManager.GetActiveScene().buildIndex == 5)
         {
             cameFromOptionsMenu = true;
             Debug.Log("Came from Options True)");
-        }else
+        }
+        else
         {
             cameFromOptionsMenu = false;
             Debug.Log("Came from Options False");
         }
 
         Debug.Log("Level Load Requested for: " + name);
+        SceneManager.LoadScene(name);
+    }
+
+
+        public void LoadLevel(string name) //USE IF LOADING A LEVEL
+    {
+        
         SceneManager.LoadScene(name);
        
     }

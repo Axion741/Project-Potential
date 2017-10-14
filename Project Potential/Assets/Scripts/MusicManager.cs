@@ -46,7 +46,7 @@ public class MusicManager : MonoBehaviour {
     void OnSceneLoaded (Scene scene, LoadSceneMode mode)
     {
         AudioClip thisLevelMusic = levelMusicChangeArray[SceneManager.GetActiveScene().buildIndex];
-        Debug.Log("Playing clip" + thisLevelMusic);
+        Debug.Log("Playing clip " + thisLevelMusic);
 
         if (thisLevelMusic && !LevelManager.cameFromOptionsMenu)
         {//if some music attached

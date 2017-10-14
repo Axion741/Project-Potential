@@ -8,6 +8,7 @@ public class EnemyStats : MonoBehaviour {
     private Animator pAnim;
     private GameObject pBlast;
     private ResultsController resultsController;
+    private bool defeated = false;
 
     public PlayerAbilities playerAbilities;
     public GameObject player;
@@ -20,14 +21,14 @@ public class EnemyStats : MonoBehaviour {
     float playerDodge;
     
     public static float evasionChance = 10f;
-    public static float currentHealth;
-    public static float maxHealth = 100;
-    public static float currentKi;
-    public static float maxKi = 100;
+    public float currentHealth;
+    public float maxHealth = 100;
+    public float currentKi;
+    public float maxKi = 100;
 
     public float experienceValue;
 
-    private float damage = 10;
+    public float damage = 10;
     private float attackBoost = 1f;
 
 
@@ -212,14 +213,24 @@ public class EnemyStats : MonoBehaviour {
 
     public void HealthChecker()
     {
-        if (currentHealth > maxHealth)
+        if (defeated == false)
         {
-            currentHealth = maxHealth;
+            
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            else if (currentHealth <= 0)
+            {
+                 defeated = true;
+                 eAnim.SetBool("isDead", true);
+                 resultsController.WinFight();
+            }
+            
         }
-        else if (currentHealth <= 0)
+        else if (defeated == true)
         {
-            eAnim.SetBool("isDead", true);
-            resultsController.WinFight();
+            return;
         }
     }
 

@@ -7,6 +7,7 @@ public class ResultsController : MonoBehaviour {
 
     public Canvas resultsCanvas;
     public Text titleText;
+    public Text pointText;
     public Text pointMessage;
     private PlayerAbilities playerAbilities;
     private EnemyStats enemyStats;
@@ -48,6 +49,7 @@ public class ResultsController : MonoBehaviour {
 
     public void TextEnabler()
     {
+        pointText.text = playerAbilities.statPoints + " Skill Points Available!";
         pointMessage.enabled = true;
     }
 }
