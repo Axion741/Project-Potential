@@ -77,6 +77,7 @@ public class PlayerAbilities : MonoBehaviour {
             resController.TextEnabler();
             print("exp to next = " + experienceThreshold);
             print("current stat points = " + statPoints);
+            LevelUp();
         }
         else return;
     }
