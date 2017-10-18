@@ -116,7 +116,7 @@ public class PlayerAbilities : MonoBehaviour {
 
     public void DeterminePP()
     {
-        maxPP = 5 * (breakPoint + 1);
+        maxPP = 3 * (breakPoint + 1);
     }
 
     public void DetermineStrength()
