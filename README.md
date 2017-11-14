@@ -16,7 +16,10 @@ Have fun and wish me luck!
 
 
 
-Next updates: Sound effects and Transformation Overhaul (maybe?)
+Release Update! (14/11/17)
+I completely forgot to update this! Project Potential is now essentially complete and available for free on the Google Play Store!
+https://play.google.com/store/apps/details?id=com.Axion741.ProjectPotential&hl=en
+No further updates to this repo are planned, and finalised files will not be uploaded, though not much is different between the final build and the one available here.
 
 Update (14/10/17) - Sorry for the delay! Been concentrating on the job hunt and looking after myself. Level Select and fights are in! Boss has some unique animation. Probably has massive balance issues for now. Release soon-ish, not far off gold release now. 
 
